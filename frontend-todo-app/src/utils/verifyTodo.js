@@ -1,4 +1,4 @@
-export const characterLimit = 50;
+import { characterLimit } from "../constants"
 
 export const verifyTaskText = (text) => {
     const trimmedText = text.replace(/\s+/g, "")

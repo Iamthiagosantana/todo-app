@@ -7,6 +7,10 @@ app.use(cors())
 
 const PORT = 4000;
 
+app.get("/", (req, res) => {
+    res.json(req.query)
+})
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });

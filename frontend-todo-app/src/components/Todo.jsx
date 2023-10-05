@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import {FaTrashAlt, FaEdit, FaCheck} from "react-icons/fa"
-import { characterLimit, verifyTaskText } from "../utils/verifyTodo"
+import { verifyTaskText } from "../utils/verifyTodo"
+import { characterLimit } from "../constants"
 
 // eslint-disable-next-line react/prop-types
 const Todo = ({ taskId, taskName, deleteTodo }) => {
