@@ -10,7 +10,7 @@ const authRouter = express.Router();
 
 const tokenVerificator = async (req, res, next) => {
     // Proceeds if the client has the token cookie, or if it's invalid. In case it's invalid, clear the cookie and then proceed.
-
+    console.log("token verificator")
     const token = req.cookies.token;
 
     if (token) {
