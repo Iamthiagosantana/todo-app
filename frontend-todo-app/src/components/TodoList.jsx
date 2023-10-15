@@ -10,7 +10,7 @@ const TodoList = () => {
   
   const deleteTodo = (todoId) => {
     axios
-      .delete(`${SERVER_URL}/todos/${todoId}`, {withCredentials: true})
+      .delete(`${SERVER_URL}/todos/${todoId}`)
       .then(() => {
         setTodos(todos.filter(todo => todo._id != todoId))
       })
@@ -27,7 +27,7 @@ const TodoList = () => {
     const todoToUpdate = todos.find(todo => todo._id === todoId)
     if (todoToUpdate) {
       axios
-        .put(`${SERVER_URL}/todos/${todoId}`, { todo: {name: todoToUpdate.name, completed: !todoToUpdate.completed }}, {withCredentials: true})
+        .put(`${SERVER_URL}/todos/${todoId}`, { todo: {name: todoToUpdate.name, completed: !todoToUpdate.completed }})
         .then(() => {
           setTodos(currentTodos =>
             currentTodos.map(todo => {
@@ -57,7 +57,7 @@ const TodoList = () => {
 
     if (todoToUpdate) {
       axios
-      .put(`${SERVER_URL}/todos/${todoId}`, { todo: {name: text, completed: todoToUpdate.completed }}, {withCredentials: true})
+      .put(`${SERVER_URL}/todos/${todoId}`, { todo: {name: text, completed: todoToUpdate.completed }})
       .then(() => {
         setTodos(currentTodos =>
           currentTodos.map(todo => {

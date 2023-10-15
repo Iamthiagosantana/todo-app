@@ -13,7 +13,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const authPost = async (username, password) => {
-    await axios.post(`${SERVER_URL}/auth/login`,{username, password}, {withCredentials: true})
+    await axios.post(`${SERVER_URL}/auth/login`,{username, password})
     .then(() => {
       loadData(setTodos)
       .then(() => navigate('/todos'))

@@ -14,7 +14,7 @@ const TodoForm = () => {
     e.preventDefault()
 
     if (verifyTaskText(textRef.current.value)) {
-        axios.post(`${SERVER_URL}/todos`, {todo: {name: textRef.current.value, completed: false}}, {withCredentials: true})
+        axios.post(`${SERVER_URL}/todos`, {todo: {name: textRef.current.value, completed: false}})
         .then(res => {
           setTodos([...todos, res.data.todo])
         })
