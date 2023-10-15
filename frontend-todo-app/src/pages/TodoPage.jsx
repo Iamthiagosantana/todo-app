@@ -3,14 +3,14 @@ import TodoForm from '../components/TodoForm'
 import TodoList from '../components/TodoList'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { Context } from '../App'
+import { Context, SERVER_URL } from '../App'
 
 const TodoPage = () => {
   const navigate = useNavigate()
   const [,setTodos] = useContext(Context)
 
   const onLogoffClick = () => {
-    axios.post('http://localhost:4000/auth/logoff')
+    axios.post(`${SERVER_URL}/auth/logoff`)
     .then(() => {
       setTodos([])
     })

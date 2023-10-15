@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Todo from "./Todo";
-import { Context } from "../App";
+import { Context, SERVER_URL } from "../App";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const TodoList = () => {
   
   const deleteTodo = (todoId) => {
     axios
-      .delete(`http://localhost:4000/todos/${todoId}`, {withCredentials: true})
+      .delete(`${SERVER_URL}/todos/${todoId}`, {withCredentials: true})
       .then(() => {
         setTodos(todos.filter(todo => todo._id != todoId))
       })
@@ -27,7 +27,7 @@ const TodoList = () => {
     const todoToUpdate = todos.find(todo => todo._id === todoId)
     if (todoToUpdate) {
       axios
-        .put(`http://localhost:4000/todos/${todoId}`, { todo: {name: todoToUpdate.name, completed: !todoToUpdate.completed }}, {withCredentials: true})
+        .put(`${SERVER_URL}/todos/${todoId}`, { todo: {name: todoToUpdate.name, completed: !todoToUpdate.completed }}, {withCredentials: true})
         .then(() => {
           setTodos(currentTodos =>
             currentTodos.map(todo => {
@@ -57,7 +57,7 @@ const TodoList = () => {
 
     if (todoToUpdate) {
       axios
-      .put(`http://localhost:4000/todos/${todoId}`, { todo: {name: text, completed: todoToUpdate.completed }}, {withCredentials: true})
+      .put(`${SERVER_URL}/todos/${todoId}`, { todo: {name: text, completed: todoToUpdate.completed }}, {withCredentials: true})
       .then(() => {
         setTodos(currentTodos =>
           currentTodos.map(todo => {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useRef } from 'react'
 import { verifyLoginData } from '../utils/verifyLoginData';
-import { Context } from '../App';
+import { Context, SERVER_URL } from '../App';
 import { Link, useNavigate } from 'react-router-dom';
 import { loadData } from '../utils/loadData';
 
@@ -13,11 +13,16 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const authPost = async (username, password) => {
-    await axios.post("http://localhost:4000/auth/register", {username, password})
+    await axios.post(`${SERVER_URL}/auth/register`, {username, password})
     .then(() => {
       loadData(setTodos)
       .then(() => navigate('/todos'))
-      .catch(err => console.log(err))
+      .catch(err => {
+        const { redirectTo } = err.response.data 
+        if (redirectTo) {
+          navigate(redirectTo)
+        }
+      })
     })
     .catch(err => {
 

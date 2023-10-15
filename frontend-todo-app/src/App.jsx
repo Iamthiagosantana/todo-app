@@ -11,13 +11,13 @@ import axios from 'axios'
 axios.defaults.withCredentials = true;
 
 export const Context = React.createContext();
+export const SERVER_URL = import.meta.env.REACT_APP_SERVER_URL;
 
 function App() {
 
   const [todos, setTodos] = useState([])
 
   useEffect(() => {
-    
     if (todos.length === 0) {
       loadData(setTodos)
     }
