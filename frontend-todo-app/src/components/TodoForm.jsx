@@ -1,18 +1,29 @@
 import { useRef , useContext } from "react"
 import { verifyTaskText } from "../utils/verifyTodo"
 import { Context } from "../App"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 const TodoForm = () => {
 
   const textRef =  useRef()
   const [todos, setTodos] = useContext(Context)
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     if (verifyTaskText(textRef.current.value)) {
-        
-        setTodos([...todos, {id: 50, name: textRef.current.value}])
+        axios.post("http://localhost:4000/todos", {todo: {name: textRef.current.value, completed: false}}, {withCredentials: true})
+        .then(res => {
+          setTodos([...todos, res.data.todo])
+        })
+        .catch(err => {
+          const { redirectTo } = err.response.data
+          if (redirectTo) {
+            navigate(redirectTo)
+          }
+        })
     }
   }
 

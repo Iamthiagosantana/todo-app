@@ -1,20 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
-import TodoForm from './components/TodoForm'
-import TodoList from './components/TodoList'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import TodoPage from './pages/TodoPage'
+
+import { loadData } from './utils/loadData'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true;
 
 export const Context = React.createContext();
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  
+
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    
+    if (todos.length === 0) {
+      loadData(setTodos)
+    }
+  }, [])
   return (
-    <div className=" bg-black w-[40vw] h-[80vh] my-10 px-4 mx-auto shadow-xl font-poppins overflow-auto">
-      <Context.Provider value={[todos, setTodos]}>
-        <TodoForm/>
-        <TodoList/>
-      </Context.Provider>
-    </div>
+    <BrowserRouter>
+    <Context.Provider value={[todos, setTodos]}>
+      <Routes>
+        
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/register" element={<RegisterPage/>}></Route>
+        <Route path="/todos" element={<TodoPage/>}></Route>
+
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Context.Provider>
+    </BrowserRouter>
   )
 }
 
