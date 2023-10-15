@@ -16,7 +16,7 @@ const checkAuthentication = async (req, res, next) => {
     jwt.verify(token, process.env.SECRET, (err, user) => {
         if (err) {
             // The token is invalid, therefore it should be cleared and the user should be sent back to the login page.
-            return res.clearCookie("token").status(401).json({message: "Unauthorized.", redirectTo: '/login'})
+            return res.clearCookie("token", {secure: true, sameSite: "None"}).status(401).json({message: "Unauthorized.", redirectTo: '/login'})
         }
         req.user = user
     })

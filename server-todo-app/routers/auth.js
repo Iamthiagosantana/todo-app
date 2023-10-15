@@ -18,7 +18,7 @@ const tokenVerificator = async (req, res, next) => {
             if (err) {
                 // If the token exists but is invalid, it should be cleared and the user should be allowed to proceed with the authentication.
 
-                res.clearCookie("token")
+                res.clearCookie("token", {secure: true, sameSite: "None"})
 
                 return next();
             }
@@ -120,7 +120,7 @@ authRouter.post('/logoff', async (req, res) => {
 
     // The user is authorized, therefore they should have their token cleared and get redirected to the login page.
 
-    res.clearCookie("token").send("Cookie removed");
+    res.clearCookie("token", {secure: true, sameSite: "None"}).send("Cookie removed");
 })
 
 module.exports = authRouter
