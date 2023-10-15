@@ -11,7 +11,7 @@ const TodoList = () => {
   const deleteTodo = (todoId) => {
     axios
       .delete(`http://localhost:4000/todos/${todoId}`, {withCredentials: true})
-      .then(res => {
+      .then(() => {
         setTodos(todos.filter(todo => todo._id != todoId))
       })
       .catch(err => {
@@ -28,8 +28,7 @@ const TodoList = () => {
     if (todoToUpdate) {
       axios
         .put(`http://localhost:4000/todos/${todoId}`, { todo: {name: todoToUpdate.name, completed: !todoToUpdate.completed }}, {withCredentials: true})
-        .then(res => {
-          console.log(res.data.message)
+        .then(() => {
           setTodos(currentTodos =>
             currentTodos.map(todo => {
               if (todo._id === todoId) {
@@ -59,8 +58,7 @@ const TodoList = () => {
     if (todoToUpdate) {
       axios
       .put(`http://localhost:4000/todos/${todoId}`, { todo: {name: text, completed: todoToUpdate.completed }}, {withCredentials: true})
-      .then(res => {
-        console.log(res.data.message)
+      .then(() => {
         setTodos(currentTodos =>
           currentTodos.map(todo => {
             if (todo._id === todoId) {

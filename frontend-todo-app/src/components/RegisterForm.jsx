@@ -16,7 +16,7 @@ const LoginForm = () => {
     await axios.post("http://localhost:4000/auth/register", {username, password})
     .then(() => {
       loadData(setTodos)
-      .then(() => {console.log("why"); navigate('/todos')})
+      .then(() => navigate('/todos'))
       .catch(err => console.log(err))
     })
     .catch(err => {
