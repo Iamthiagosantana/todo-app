@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json())
 
 const corsContent = {
-    origin: 'http://localhost:5173',
+    origin: ['https://thiagosantana-todo-app.onrender.com'],
     credentials: true,
 }
 
@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopo
     .then(() => console.log(`The Database is connected successfully`))
     .catch(err => console.log(err));
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT ?? 4000;
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

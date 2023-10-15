@@ -58,6 +58,7 @@ authRouter.post('/login', tokenVerificator, async (req, res) => {
 
         return res.cookie("token", token, {
             httpOnly: true,
+            secure: true,
             maxAge: 1 * 60 * 60 * 1000
         }).send("Cookie set");
     }
@@ -96,6 +97,7 @@ authRouter.post('/register', tokenVerificator, async (req, res) => {
 
         return res.cookie("token", newToken, {
             httpOnly: true,
+            secure: true,
             maxAge: 1 * 60 * 60 * 1000
         }).send("Cookie set");
 
