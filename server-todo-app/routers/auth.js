@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const User = require('../models/User')
 
 const verifyLoginData = require("../utils/verifyLoginData");
+const cookieSettings = require("../cookieSettings");
 
 const authRouter = express.Router();
 
@@ -18,7 +19,7 @@ const tokenVerificator = async (req, res, next) => {
             if (err) {
                 // If the token exists but is invalid, it should be cleared and the user should be allowed to proceed with the authentication.
 
-                res.clearCookie("token", {secure: true, sameSite: "None"})
+                res.clearCookie("token", {secure: cookieSettings.secure, sameSite: "None"})
 
                 return next();
             }
@@ -56,12 +57,7 @@ authRouter.post('/login', tokenVerificator, async (req, res) => {
 
         const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
 
-        return res.cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "None",
-            maxAge: 1 * 60 * 60 * 1000
-        }).send("Cookie set");
+        return res.cookie("token", token, cookieSettings).send("Cookie set");
     }
     catch (err) {
 
@@ -96,12 +92,7 @@ authRouter.post('/register', tokenVerificator, async (req, res) => {
 
         const newToken = jwt.sign(data, process.env.SECRET, {expiresIn: '1h'})
 
-        return res.cookie("token", newToken, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "None",
-            maxAge: 1 * 60 * 60 * 1000
-        }).send("Cookie set");
+        return res.cookie("token", newToken, cookieSettings).send("Cookie set");
 
     }
     catch (err) {
@@ -120,7 +111,7 @@ authRouter.post('/logoff', async (req, res) => {
 
     // The user is authorized, therefore they should have their token cleared and get redirected to the login page.
 
-    res.clearCookie("token", {secure: true, sameSite: "None"}).send("Cookie removed");
+    res.clearCookie("token", {secure: cookieSettings.secure, sameSite: "None"}).send("Cookie removed");
 })
 
 module.exports = authRouter
