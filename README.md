@@ -6,6 +6,25 @@ Welcome to the documentation for my to-do list application.
 This user-friendly application simplifies the organizination and management of your tasks.
 This documentation will guide you through setting up, running and using the application.
 
+# Functionality:
+
+The application uses JSON Web Tokens and Cookies to handle authenticaction and verification before changing the todos of the user.
+The passwords are hashed using BCrypt
+The MongoDB Cloud database is accessed through Mongoose.
+
+# Tests (Only available through the online access to the application):
+
+A few users publicly available to understand how the application works:
+
+-  Username: TestUser1
+
+   Password: TestUser1
+
+-  Username: TestUser2
+
+   Password: TestUser2
+
+
 # Setting up the Development Environment:
 
 To set up the development environment, follow those steps:
