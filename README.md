@@ -51,7 +51,7 @@ To set up the development environment, follow those steps:
 ```npm i```
 
 # Executing the Application:
-asks
+
 ## Online Access:
 
 [To-Do List App](https://thiagosantana-todo-app.onrender.com/)
