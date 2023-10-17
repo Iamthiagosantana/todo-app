@@ -8,8 +8,9 @@ This documentation will guide you through setting up, running and using the appl
 
 # Functionality:
 
-The application uses JSON Web Tokens and Cookies to handle authenticaction and verification before changing the todos of the user.
-The passwords are hashed using BCrypt
+The application sends requests to the server when users log in, log off, or register, and whenever a task is added, changed or deleted.
+It uses JSON Web Tokens and Cookies to verify if the user is authenticated before proceeding with the requests.
+The passwords are hashed and compared using BCrypt.
 The MongoDB Cloud database is accessed through Mongoose.
 
 # Tests (Only available through the online access to the application):
